@@ -11,6 +11,10 @@ const Wrapper = styled.main`
 const FormCreate = styled.form`
 
 `
+const Block = styled.div`
+  position: relative;
+`
+
 const WrapperInput = styled.div`
   max-width: 40%;
   margin: 0 auto;
@@ -18,8 +22,8 @@ const WrapperInput = styled.div`
   padding: 15px 20px;
   background-color: rgba(255, 255, 255, 0);
   position: absolute;
-  top: 17%;
-  left: 26.7%;
+  top: 1%;
+  left: 30.1%;
  `
 
 const InputFormCreate = styled.textarea`
@@ -182,18 +186,20 @@ export const Notes = () => {
   return (
     <Wrapper>
       <FormCreate>
-        <WrapperInput>
-          {wordArray.map((item) => {
-            return (
-              <span style={{
-                backgroundColor: item.includes("#") ? "darkorange" : "white"
-              }}>{item} </span>
-            )
-          })}
-        </WrapperInput>
-        <InputFormCreate
-          onChange={onValueChange}
-          value={value} />
+        <Block>
+          <WrapperInput>
+            {wordArray.map((item) => {
+              return (
+                <span style={{
+                  backgroundColor: item.includes("#") ? "darkorange" : "white"
+                }}>{item} </span>
+              )
+            })}
+          </WrapperInput>
+          <InputFormCreate
+            onChange={onValueChange}
+            value={value} />
+        </Block>
         <Button onClick={onNoteSubmit}>Add</Button>
       </FormCreate>
 
