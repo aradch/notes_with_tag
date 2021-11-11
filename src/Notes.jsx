@@ -11,15 +11,24 @@ const Wrapper = styled.main`
 const FormCreate = styled.form`
 
 `
+const WrapperInput = styled.div`
+  max-width: 40%;
+  margin: 0 auto;
+  text-align: left;
+  padding: 15px 20px;
+  background-color: rgba(255, 255, 255, 0);
+  position: absolute;
+  top: 17%;
+  left: 26.7%;
+ `
 
-const InputFormCreate = styled.input`
+const InputFormCreate = styled.textarea`
   width: 40%;
-  height: 20px;
+  height: 100px;
   border: 1px solid gray;
   border-radius: 7px;
   padding: 15px 20px;
   outline: none;
-  text-overflow: ellipsis;
 `
 
 const FormSearch = styled.form`
@@ -70,7 +79,7 @@ const ButtonDeleteListNotes = styled.button`
 `
 
 const ButtonChangeListNotes = styled.button`
-  background-color: red;
+  background-color: orange;
   color: white;
   border-radius: 5px;
   margin-left: 10px;
@@ -90,7 +99,7 @@ const ItemListTag = styled.li`
   list-style-type: none;
 `
 const ButtonDeleteListTag = styled.button`
-  background-color: red;
+  background-color: orange;
   color: white;
   border-radius: 5px;
   margin-left: 10px;
@@ -108,6 +117,8 @@ export const Notes = () => {
   const [temporaryNoteTag, setTemporaryNoteTag] = useState([])
   const [json, setJson] = useState(null)
 
+  const [wordArray, setWordArray] = useState([])
+
 
   useEffect(() => {
     let val = value.split(/(#[a-z\d-]+)/ig)
@@ -120,9 +131,9 @@ export const Notes = () => {
     }
   }, [value])
 
-
   const onValueChange = (e) => {
     setValue(e.target.value)
+    setWordArray(e.target.value.split(" "))
   }
 
   const onNoteSubmit = (e) => {
@@ -171,10 +182,18 @@ export const Notes = () => {
   return (
     <Wrapper>
       <FormCreate>
+        <WrapperInput>
+          {wordArray.map((item) => {
+            return (
+              <span style={{
+                backgroundColor: item.includes("#") ? "darkorange" : "white"
+              }}>{item} </span>
+            )
+          })}
+        </WrapperInput>
         <InputFormCreate
           onChange={onValueChange}
-          value={value}
-          placeholder="Enter the text" />
+          value={value} />
         <Button onClick={onNoteSubmit}>Add</Button>
       </FormCreate>
 

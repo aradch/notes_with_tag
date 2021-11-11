@@ -5,6 +5,8 @@ import { Notes } from './Notes'
 
 const GlobalStyle = createGlobalStyle`
   * {
+  font-family: sans-serif;
+  font-size: 16px;
   box-sizing: border-box;
   margin: 0;
   background-color: white;
