@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const Wrapper = styled.main`
   width: 100%;
@@ -9,13 +9,13 @@ const Wrapper = styled.main`
   `
 
 const FormCreate = styled.form`
-
+  position: relative;
 `
-const Block = styled.div`
+const WrapperInput = styled.div`
   position: relative;
 `
 
-const WrapperInput = styled.div`
+const Block = styled.div`
   max-width: 40%;
   margin: 0 auto;
   text-align: left;
@@ -56,6 +56,12 @@ const Button = styled.button`
   margin-left: 10px;
   padding: 7px 22px;
   border: none;
+
+  ${({ positionAbsolute }) => positionAbsolute && css`
+    position: absolute;
+    top: 65px;
+    left: 70%;
+  `}
 `
 
 const Flex = styled.div`
@@ -186,8 +192,8 @@ export const Notes = () => {
   return (
     <Wrapper>
       <FormCreate>
-        <Block>
-          <WrapperInput>
+        <WrapperInput>
+          <Block>
             {wordArray.map((item) => {
               return (
                 <span style={{
@@ -195,12 +201,12 @@ export const Notes = () => {
                 }}>{item} </span>
               )
             })}
-          </WrapperInput>
+          </Block>
           <InputFormCreate
             onChange={onValueChange}
             value={value} />
-        </Block>
-        <Button onClick={onNoteSubmit}>Add</Button>
+        </WrapperInput>
+        <Button positionAbsolute onClick={onNoteSubmit}>Add</Button>
       </FormCreate>
 
       <FormSearch>
